@@ -1,21 +1,25 @@
 const express = require('express');
-const { PythonShell } = require('python-shell');
-
+const axios = require('axios');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.get('/generate-powerball', (req, res) => {
-    PythonShell.run('powerball.py', null, (err, results) => {
-        if (err) {
-            res.status(500).send('Error running Python script');
-            console.error(err);
-        } else {
-            res.send({
-                message: "Generated Powerball Numbers",
-                powerballNumbers: results
-            });
-        }
-    });
+// Replace 'https://api.powerballdata.com/results' with the actual Powerball API endpoint
+const POWERBALL_API_URL = 'https://api.powerballdata.com/results';
+
+app.get('/fetch-powerball-results', async (req, res) => {
+    try {
+        const response = await axios.get(POWERBALL_API_URL);
+        res.json({
+            status: 'success',
+            data: response.data
+        });
+    } catch (error) {
+        console.error('Failed to fetch Powerball results:', error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Failed to fetch Powerball results'
+        });
+    }
 });
 
 app.listen(port, () => {
