@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Powerball Numbers Statistics</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    .header, .next-drawing, .generate {
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .number-grid, .powerball-grid, .predicted-result {
+        display: grid;
+        gap: 5px;
+        margin: auto;
+    }
+    .number-grid {
+        grid-template-columns: repeat(10, 1fr);
+        max-width: 800px;
+    }
+    .powerball-grid {
+        grid-template-columns: repeat(6, 1fr);
+        max-width: 480px;
+    }
+    .number-box, .result-box {
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="title">Current Draw</div>
+        <p>Jackpot: $100 Million</p>
+        <p>Winning Combination: 03, 21, 45, 53, 56 + 16</p>
+        <p>Winner: Yes/No</p>
+        <p>Date: September 10, 2023</p>
+    </div>
+    <div class="next-drawing">
+        <div class="title">Next Drawing</div>
+        <p>Estimated Jackpot: $120 Million</p>
+        <p>Date: September 13, 2023</p>
+    </div>
+</div>
+<div class="number-grid" id="whiteNumbers"></div>
+<div class="powerball-grid" id="powerballNumbers"></div>
+<div class="generate">
+    <button onclick="generatePredictedCombination()">Generate Predicted Winning Combination</button>
+    <div class="predicted-result" id="predictedResult"></div>
+</div>
+<script>
+function generatePredictedCombination() {
+    // Mock-up logic for demonstration: generate random numbers
+    const whiteBalls = [];
+    while (whiteBalls.length < 5) {
+        let randomNumber = Math.floor(Math.random() * 69) + 1;
+        if (!whiteBalls.includes(randomNumber)) {
+            whiteBalls.push(randomNumber);
+        }
+    }
+    const powerBall = Math.floor(Math.random() * 26) + 1;
+
+    const resultElement = document.getElementById('predictedResult');
+    resultElement.innerHTML = `<div class="result-box">
+        <div class="title">Predicted Combination:</div>
+        <p>White Balls: ${whiteBalls.join(', ')}</p>
+        <p>Powerball: ${powerBall}</p>
+    </div>`;
+}
+
+</script>
+</body>
+</html>
+
+
